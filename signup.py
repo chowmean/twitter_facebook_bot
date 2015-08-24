@@ -1,3 +1,7 @@
+#author : chowmean
+#github.com/chowmean
+
+
 from selenium import webdriver
 import os
 import requests
@@ -25,20 +29,19 @@ mailer=['mailing domain']
 
 
 def login(name,username,mail,password,ip,port):
-    br = my_proxy()
-    br.get('https://twitter.com/signup')
-    if os.path.exists('cookies.pkl'):
-        form = br.find_element_by_id('phx-signup-form')
-        name_input = br.find_element_by_id('full-name')
+   	br = my_proxy()
+   	br.get('https://twitter.com/signup')
+    	form = br.find_element_by_id('phx-signup-form')
+    	name_input = br.find_element_by_id('full-name')
 	print "entering Name"
-        email_input = br.find_element_by_id('email')
+    	email_input = br.find_element_by_id('email')
 	print "entering mail"
 	pass_input=br.find_element_by_id('password')
 	print "entering password"	
 	username_post=br.find_element_by_id('username')
 	print "entering username"	
 	name_input.send_keys(name)
-        email_input.send_keys(mail)
+    	email_input.send_keys(mail)
 	pass_input.send_keys(password)
 	username_post.send_keys(username)     
 	print "entered" 
@@ -47,32 +50,9 @@ def login(name,username,mail,password,ip,port):
 	time.sleep(10)
 	a=br.find_element_by_class_name('skip-link')
 	insert(name,username,mail,password)
-	print "Submiting form"	
-        #pickle.dump( br.get_cookies() , open("cookies.pkl","wb"))
+	print "Submiting form"
 	print "cookies exist"
-    else:
-        try:
-	   form = br.find_element_by_id('phx-signup-form')
-           name_input = br.find_element_by_id('full-name')
-           email_input = br.find_element_by_id('email')
-	   pass_input=br.find_element_by_id('password')
-	   username=br.find_element_by_id('username')
-	   name_input.send_keys(name)
-           email_input.send_keys(mail)
-	   pass_input.send_keys(password)
-	   username.send_keys(username)        
-           br.implicitly_wait(10)
-           time.sleep(10)	
-	   form.submit()
-	   time.sleep(15)
-	   a=br.find_element_by_class_name('skip-link')
-	   #insert(name,username,mail,password,ip,port)	
-           br.implicitly_wait(10)
-	   if os.path.exists('cookies.pkl'):
-		print "logged in" 
-        except Exception as e:
-            print traceback.format_exc(e)
-
+    
 
 
 def my_proxy():
